@@ -2,6 +2,7 @@
 
 namespace iutnc\deefy\actions;
 
+use iutnc\deefy\repository\DeefyRepository;
 use iutnc\deefy\audio\tracks\PodcastTrack;
 use iutnc\deefy\render\AudioListRenderer;
 
@@ -115,10 +116,18 @@ $piste = new PodcastTrack(
 
             $playlist = $_SESSION["playlist"];
 
+            $repo = DeefyRepository::getInstance();
+            $piste = $repo->savePodcastTrack($piste);
+
+            $idPlaylist = $playlist->id;
+            $idTrack = $piste->id;
+
+            if ($idPlaylist && $idTrack) {
+                $repo->addTrackToPlaylist((int)$idPlaylist, (int)$idTrack);
+            }
+
             $playlist->ajouterPiste($piste);
-
             $_SESSION["playlist"] = $playlist;
-
             $renderer = new AudioListRenderer($playlist);
 
             $html = $renderer->render(1);
