@@ -125,4 +125,22 @@ class DeefyRepository {
         "numero" => $position
     ]);
     }
+
+    public function findPlaylistById(int $id): ?Playlist {
+
+    $requete = $this->pdo->prepare("SELECT * FROM playlist WHERE id = :id");
+
+    $requete->execute(["id" => $id]);
+
+    $ligne = $requete->fetch(PDO::FETCH_ASSOC);
+
+    if (!$ligne) {
+        return null;
+    }
+
+    $playlist = new Playlist($ligne["nom"]);
+    $playlist->setId((int) $ligne["id"]);
+
+    return $playlist;
+    }
 }

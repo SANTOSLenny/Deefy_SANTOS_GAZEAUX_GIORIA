@@ -8,6 +8,7 @@ use iutnc\deefy\actions\DefaultAction;
 use iutnc\deefy\actions\DisplayPlaylistAction;
 use iutnc\deefy\actions\AddUserAction;
 use iutnc\deefy\actions\DisplayAllPlaylistsAction;
+use iutnc\deefy\actions\SelectPlaylistAction;
 
 class Dispatcher{
 
@@ -39,6 +40,10 @@ class Dispatcher{
 
         case "all-playlists":
                 $action = new DisplayAllPlaylistsAction();
+                break;
+
+        case "select-playlist":
+                $action = new SelectPlaylistAction();
                 break;
         
         case "default":
