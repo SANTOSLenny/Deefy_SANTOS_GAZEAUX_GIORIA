@@ -4,6 +4,7 @@ namespace iutnc\deefy\actions;
 
 use iutnc\deefy\audio\lists\Playlist;
 use iutnc\deefy\render\AudioListRenderer;
+use iutnc\deefy\repository\DeefyRepository;
 
 class AddPlaylistAction extends Action {
 
@@ -21,24 +22,31 @@ class AddPlaylistAction extends Action {
         HTML;
         }
 
-        else {
-            $nom = filter_var(
-                $_POST["nom"] ?? "",
-                FILTER_SANITIZE_SPECIAL_CHARS
-            );
+else {
+    $nom = trim($_POST["nom"] ?? "");
 
-            $playlist = new Playlist($nom);
+    if ($nom === "") {
+        return "<p>Le nom de la playlist ne peut pas être vide.</p>";
+    }
 
-            $_SESSION["playlist"] = $playlist;
+    if (mb_strlen($nom) > 100) {
+        return "<p>Le nom de la playlist est trop long.</p>";
+    }
 
-            $renderer = new AudioListRenderer($playlist);
+    $playlist = new Playlist($nom);
 
-            $html = $renderer->render(1);
+    $repo = DeefyRepository::getInstance();
+    $playlist = $repo->saveEmptyPlaylist($playlist);
 
-            $html .= '<a href="?action=add-track">Ajouter une piste</a>';
+    $_SESSION["playlist"] = $playlist;
 
-            return $html;
-        }
+    $renderer = new AudioListRenderer($playlist);
+    $html = $renderer->render(1);
+
+    $html .= '<a href="?action=add-track">Ajouter une piste</a>';
+
+    return $html;
+}
 
     }
 }
