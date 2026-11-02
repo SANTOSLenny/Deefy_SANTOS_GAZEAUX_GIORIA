@@ -7,6 +7,7 @@ use iutnc\deefy\actions\AddPodcastTrackAction;
 use iutnc\deefy\actions\DefaultAction;
 use iutnc\deefy\actions\DisplayPlaylistAction;
 use iutnc\deefy\actions\AddUserAction;
+use iutnc\deefy\actions\DisplayAllPlaylistsAction;
 
 class Dispatcher{
 
@@ -35,6 +36,10 @@ class Dispatcher{
         case "add-user":
             $action = new AddUserAction();
             break;
+
+        case "all-playlists":
+                $action = new DisplayAllPlaylistsAction();
+                break;
         
         case "default":
         default:
@@ -66,6 +71,7 @@ private function renderPage(string $html): void {
             <a href="?action=default">Accueil</a>
             <a href="?action=add-user">Inscription</a>
             <a href="?action=add-playlist">Créer une playlist</a>
+            <a href="?action=all-playlists">Mes playlists</a>
         </nav>
 
         <main>
