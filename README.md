@@ -22,5 +22,5 @@ Cocher `[x]` lorsqu’une fonctionnalité est terminée et laisser `[ ]` sinon.
 - [x] La définir comme playlist courante en la stockant en session.
 
 ## 5. Afficher la playlist courante
-- [ ] Proposer cette fonctionnalité dans le menu d’accueil.
-- [ ] Afficher la playlist stockée en session.
+- [x] Proposer cette fonctionnalité dans le menu d’accueil.
+- [x] Afficher la playlist stockée en session.
