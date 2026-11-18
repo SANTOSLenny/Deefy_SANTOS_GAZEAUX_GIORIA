@@ -4,7 +4,7 @@ namespace iutnc\deefy\render;
 
 use iutnc\deefy\audio\lists\AudioList;
 
-class AudioListRenderer extends  renderer{
+class AudioListRenderer extends Renderer{
 
     private AudioList $audiolist;
 
@@ -15,7 +15,7 @@ class AudioListRenderer extends  renderer{
     public function render(int $selector = 1) : string {
         $html = "<div class=\"audio-list\">";
         
-        $html .= "<h2>" . $this->audiolist->nom . "</h2>";
+        $html .= "<h2>" . htmlspecialchars($this->audiolist->nom, ENT_QUOTES, 'UTF-8') . "</h2>";
         $html .= "<ul class=\"track-list\">";
 
         foreach ($this->audiolist->liste as $piste) {
