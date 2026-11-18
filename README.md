@@ -11,9 +11,9 @@ Cocher `[x]` lorsqu’une fonctionnalité est terminée et laisser `[ ]` sinon.
 - [x] La définir comme playlist courante en la stockant en session.
 
 ## 3. Ajouter une piste
-- [ ] Proposer un bouton « Ajouter une piste » dans l’affichage d’une playlist.
-- [ ] Afficher un formulaire permettant de saisir les données de la piste.
-- [ ] Ajouter la piste à la playlist courante lors de la validation.
+- [x] Proposer un bouton « Ajouter une piste » dans l’affichage d’une playlist.
+- [x] Afficher un formulaire permettant de saisir les données de la piste.
+- [x] Ajouter la piste à la playlist courante lors de la validation.
 
 ## 4. Créer une playlist vide
 - [x] Proposer cette fonctionnalité dans le menu d’accueil.
