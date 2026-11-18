@@ -126,10 +126,8 @@ class DeefyRepository {
     ]);
     }
 
-    public function findPlaylistById(int $id): ?Playlist {
-
+public function findPlaylistById(int $id): ?Playlist {
     $requete = $this->pdo->prepare("SELECT * FROM playlist WHERE id = :id");
-
     $requete->execute(["id" => $id]);
 
     $ligne = $requete->fetch(PDO::FETCH_ASSOC);
@@ -141,6 +139,22 @@ class DeefyRepository {
     $playlist = new Playlist($ligne["nom"]);
     $playlist->setId((int) $ligne["id"]);
 
-    return $playlist;
+    $requetePistes = $this->pdo->prepare(
+        "SELECT t.* FROM playlist2track AS pt JOIN track AS t ON t.id = pt.id_track WHERE pt.id_pl = :id AND t.type = 'P' ORDER BY pt.no_piste_dans_liste"
+    );
+    $requetePistes->execute(["id" => $id]);
+
+    while ($lignePiste = $requetePistes->fetch(PDO::FETCH_ASSOC)) {
+        $piste = new PodcastTrack($lignePiste["titre"], $lignePiste["filename"]);
+        $piste->setId((int) $lignePiste["id"]);
+        $piste->setArtiste($lignePiste["auteur_podcast"] ?? "");
+        $piste->setGenre($lignePiste["genre"] ?? "");
+        $piste->setSec((int) $lignePiste["duree"]);
+        $piste->setDate($lignePiste["date_posdcast"] ?? "");
+
+        $playlist->ajouterPiste($piste);
     }
+
+    return $playlist;
+}
 }

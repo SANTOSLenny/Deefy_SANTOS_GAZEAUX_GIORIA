@@ -77,6 +77,7 @@ private function renderPage(string $html): void {
             <a href="?action=add-user">Inscription</a>
             <a href="?action=add-playlist">Créer une playlist</a>
             <a href="?action=all-playlists">Mes playlists</a>
+            <a href="?action=playlist">Afficher la playlist courante</a>
         </nav>
 
         <main>
